@@ -5,11 +5,11 @@
       flat
   >
     <v-container class="py-0 fill-height">
-      <v-avatar
-          class="mr-10"
+      <v-col
+          class="text-h4"
           color="grey darken-1"
-          size="32"
-      ></v-avatar>
+          size="60"
+      >Simple Store</v-col>
 
       <v-btn
           v-for="link in links"
@@ -28,9 +28,16 @@
             hide-details
             rounded
             solo-inverted
-        ></v-text-field>
+        ><template v-slot:label>
+          Search for products <v-icon style="vertical-align: middle" size="20">
+          fas fa-search
+        </v-icon>
+        </template></v-text-field>
       </v-responsive>
-      <i class="fas fa-shopping-cart fa-2x"></i>
+      <v-spacer></v-spacer>
+      <v-icon>
+        fas fa-shopping-cart fa-2x
+      </v-icon>
     </v-container>
   </v-app-bar>
 </template>
@@ -40,10 +47,9 @@ export default {
   name: "NavBar",
   data: () => ({
     links: [
-      'Dashboard',
-      'Messages',
-      'Profile',
-      'Updates',
+      'Home',
+      'Info',
+      'Contacts',
     ],
   }),
 }
