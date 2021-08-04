@@ -1,16 +1,16 @@
 <template>
   <v-app id="inspire">
-    <NavBar/>
-    <v-main class="grey lighten-3">
+    <NavBar />
+    <v-main class="app">
       <v-container>
         <v-row>
-          <Categories/>
+          <Categories />
           <v-col>
             <v-sheet
-                min-height="70vh"
-                rounded="lg"
+              min-height="70vh"
+              rounded="lg"
             >
-              <!--  -->
+              <Content />
             </v-sheet>
           </v-col>
         </v-row>
@@ -22,8 +22,9 @@
 <script>
 import NavBar from "./components/NavBar";
 import Categories from "./components/Categories";
+import Content from "./components/Content";
 export default {
-  components: {Categories, NavBar},
+  components: {Content, Categories, NavBar},
   data: () => ({
 
   }),
