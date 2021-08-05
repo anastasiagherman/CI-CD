@@ -2,7 +2,9 @@
   <v-app id="inspire">
     <NavBar />
     <v-main class="app">
-      <v-container>
+      <v-container
+        fluid
+      >
         <v-row>
           <Categories />
           <v-col>
