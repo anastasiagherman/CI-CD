@@ -50,7 +50,7 @@
       >
         Products
       </v-row>
-      <v-row>
+      <v-row key="products">
         <v-col
           v-for="(item, i) in $store.getters['products/getList']"
           :key="item.link + i"
@@ -83,10 +83,17 @@ name: "Products",
     loading: false,
     selection: 1,
   }),
+  watch: {
+    link: {
+      immediate: true,
+      handler() {
+        this.$store.dispatch('products/loadProducts', this.link);
+      }
+    },
+  },
   mounted() {
   this.$store.dispatch('products/loadProducts', this.link);
   },
-
   methods: {
 
   }

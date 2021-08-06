@@ -11,37 +11,41 @@
       />
     </template>
 
-    <div v-if="item.img.length !== 0">
-      <v-img
-        height="250"
-        :src="item.img[0]"
-      />
-    </div>
-    <div v-else>
+    <div v-if="item.img.length === 0 || item.img[0].endsWith('.gif')">
       <v-img
         height="250"
         :src="require('../../assets/defaultImg.jpg')"
       />
     </div>
+    <div v-else>
+      <v-img
+        height="250"
+        :src="item.img[0]"
+      />
+    </div>
+    <div
+      class="scroll-y"
+      style="height: 300px"
+    >
+      <v-card-title>{{ item.title }}</v-card-title>
 
-    <v-card-title>{{ item.title }}</v-card-title>
+      <v-card-text>
+        <div
+          v-if="item.noPrice || item.price === null"
+          class="my-4 text-subtitle-1"
+        >
+          Договорная
+        </div>
+        <div
+          v-else
+          class="my-4 text-subtitle-1"
+        >
+          ${{ item.price }}
+        </div>
 
-    <v-card-text>
-      <div
-        v-if="item.noPrice"
-        class="my-4 text-subtitle-1"
-      >
-        Договорная
-      </div>
-      <div
-        v-else
-        class="my-4 text-subtitle-1"
-      >
-        ${{ item.price }}
-      </div>
-
-      <div>{{ item.description.substring(0, 45) }}</div>
-    </v-card-text>
+        <div>{{ item.description.substring(0, 100) }}</div>
+      </v-card-text>
+    </div>
 
     <v-divider class="mx-4" />
     <v-card-actions>
