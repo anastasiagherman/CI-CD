@@ -3,20 +3,27 @@ export default {
     state: {
         list: [
 
-        ]
+        ],
+        isLoading: false
     },
     getters: {
-        getList: (state) => state.list
+        getList: (state) => state.list,
+        getIsLoading: (state) => state.isLoading
     },
     actions: {
         async fetchCategories({commit}) {
+            commit('mutateLoading', true);
             const result = await fetch('/api');
             commit('mutateList', await result.json());
+            commit('mutateLoading', false);
         }
     },
     mutations: {
         mutateList(state, payload) {
             state.list = payload;
+        },
+        mutateLoading(state, payload) {
+            state.isLoading = payload;
         }
     }
 }

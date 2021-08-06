@@ -1,6 +1,13 @@
 <template>
   <v-col cols="2">
-    <v-expansion-panels focusable>
+    <v-progress-linear
+      v-if="$store.getters['categories/getIsLoading']"
+      indeterminate
+      color="yellow darken-2"
+    />
+    <v-expansion-panels
+      focusable
+    >
       <v-expansion-panel
         v-for="link in $store.getters['categories/getList']"
         :key="link"
