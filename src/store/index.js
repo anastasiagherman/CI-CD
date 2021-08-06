@@ -1,10 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as modules from './modules'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
+const dataState = createPersistedState({
+    paths: ['categories.list']
+})
 
 const store = new Vuex.Store({
-    modules
+    modules,
+    plugins: [dataState]
 })
 export default store;

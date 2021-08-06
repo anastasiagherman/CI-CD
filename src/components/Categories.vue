@@ -9,14 +9,14 @@
       focusable
     >
       <v-expansion-panel
-        v-for="link in $store.getters['categories/getList']"
-        :key="link"
+        v-for="(link, i) in $store.getters['categories/getList']"
+        :key="i"
       >
         <div v-if="!link.parentLink">
           <v-expansion-panel-header>{{ link.name }}</v-expansion-panel-header>
           <div
-            v-for="linkChild in $store.getters['categories/getList']"
-            :key="linkChild"
+            v-for="(linkChild, j) in $store.getters['categories/getList']"
+            :key="j"
           >
             <v-expansion-panel-content
               v-if="linkChild.parentLink === link.link"
@@ -24,7 +24,11 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title class="text-wrap">
-                    {{ linkChild.name }}
+                    <router-link
+                      :to="{href:'/products', query: {link: linkChild.link}}"
+                    >
+                      {{ linkChild.name }}
+                    </router-link>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -39,14 +43,8 @@
 <script>
 export default {
   name: "Categories",
-  data: () => ({
-    links: [
-      'Laptops',
-      'Phones',
-      'Printers',
-    ],
-  }),
   mounted() {
+    if(!this.$store.getters['categories/getList'].length)
     this.$store.dispatch('categories/fetchCategories');
   }
 }

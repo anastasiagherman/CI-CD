@@ -28,14 +28,24 @@ import ProductsItem from "./ProductsItem";
 export default {
 name: "Products",
   components: {ProductsItem, Pagination},
+  props: {
+  link: {
+    required: false,
+    default: () => '',
+    type: String
+  }
+  },
   data: () => ({
     loading: false,
     selection: 1,
   }),
+  mounted() {
+  console.log(this.link);
+  },
 
   methods: {
 
-  },
+  }
 }
 </script>
 

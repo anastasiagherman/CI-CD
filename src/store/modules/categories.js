@@ -13,7 +13,7 @@ export default {
     actions: {
         async fetchCategories({commit}) {
             commit('mutateLoading', true);
-            const result = await fetch('/api');
+            const result = await fetch('/api/categories');
             commit('mutateList', await result.json());
             commit('mutateLoading', false);
         }

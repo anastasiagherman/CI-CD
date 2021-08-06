@@ -1,7 +1,6 @@
 <template>
   <div class="text-center mb-3">
     <v-pagination
-      v-model="page"
       :length="6"
     />
   </div>
