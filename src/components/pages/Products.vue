@@ -1,6 +1,8 @@
 <template>
   <v-main>
-    <v-container>
+    <v-container
+      v-if="$store.getters['products/getIsLoading']"
+    >
       <v-row
         class="text-h2"
       >
@@ -8,11 +10,53 @@
       </v-row>
       <v-row>
         <v-col
-          v-for="n in 24"
-          :key="n"
+          cols="12"
+          md="4"
+        >
+          <v-skeleton-loader
+            class="mb-6"
+            :boilerplate="true"
+            :elevation="2"
+            type="card-avatar, actions"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <v-skeleton-loader
+            class="mb-6"
+            :boilerplate="true"
+            :elevation="2"
+            type="card-avatar, actions"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <v-skeleton-loader
+            class="mb-6"
+            :boilerplate="true"
+            :elevation="2"
+            type="card-avatar, actions"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container v-else>
+      <v-row
+        class="text-h2"
+      >
+        Products
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="(item, i) in $store.getters['products/getList']"
+          :key="item.link + i"
           cols="4"
         >
-          <ProductsItem />
+          <ProductsItem :item="item" />
         </v-col>
       </v-row>
       <v-row class="justify-center">
@@ -40,7 +84,7 @@ name: "Products",
     selection: 1,
   }),
   mounted() {
-  console.log(this.link);
+  this.$store.dispatch('products/loadProducts', this.link);
   },
 
   methods: {
