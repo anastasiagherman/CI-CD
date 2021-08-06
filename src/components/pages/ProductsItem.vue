@@ -40,7 +40,7 @@
           v-else
           class="my-4 text-subtitle-1"
         >
-          ${{ item.price }}
+          {{ item.price }} {{ item.currency }}
         </div>
 
         <div>{{ item.description.substring(0, 100) }}</div>

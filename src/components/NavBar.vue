@@ -86,10 +86,13 @@
             <v-divider class="my-2" />
             <v-sheet class="pa-5">
               <v-switch
-                :value="$vuetify.theme.dark"
+                v-model="isDarkMode"
                 inset
                 :label="`Dark mode`"
-                @change="$vuetify.theme.dark = !$vuetify.theme.dark"
+                @change="() => {$store.dispatch('darkMode/changeMode', !$vuetify.theme.dark);
+                                $vuetify.theme.dark = $store.getters['darkMode/getIsDarkModeEnabled'];
+                }
+                "
               />
             </v-sheet>
           </v-list>
@@ -103,6 +106,7 @@
 export default {
   name: "NavBar",
   data: () => ({
+    isDarkMode: () => this.$store.getters['darkMode/getIsDarkModeEnabled'],
     links: [
       {title: 'Home', route: '/'},
       {title: 'Info', route: '/info'},
@@ -113,8 +117,10 @@ export default {
       { title: 'Register', icon: 'fas fa-sign-in-alt'},
       { title: 'Logout', icon: 'fas fa-sign-out-alt'},
     ],
-
   }),
+  mounted() {
+    this.$vuetify.theme.dark = this.$store.getters['darkMode/getIsDarkModeEnabled'];
+  }
 }
 </script>
 
