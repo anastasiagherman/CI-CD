@@ -27,26 +27,9 @@
       </v-btn>
 
       <v-spacer />
-
-      <v-responsive max-width="260">
-        <v-text-field
-          dense
-          flat
-          hide-details
-          rounded
-          solo-inverted
-        >
-          <template v-slot:label>
-            <v-icon
-              style="vertical-align: middle"
-              size="20"
-            >
-              fas fa-search
-            </v-icon>
-            Search for products
-          </template>
-        </v-text-field>
-      </v-responsive>
+      <Search
+        v-model="inputData"
+      />
       <v-spacer />
       <v-icon>
         fas fa-shopping-cart fa-2x
@@ -86,7 +69,7 @@
             <v-divider class="my-2" />
             <v-sheet class="pa-5">
               <v-switch
-                v-model="isDarkMode"
+                v-model="$vuetify.theme.dark"
                 inset
                 :label="`Dark mode`"
                 @change="changeDarkMode"
@@ -101,10 +84,12 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import Search from "./pages/Search";
 export default {
   name: "NavBar",
+  components: {Search},
   data: () => ({
-    isDarkMode: () => this.$store.getters['settings/getIsDarkModeEnabled'],
+    inputData: '',
     links: [
       {title: 'Home', route: '/'},
       {title: 'Info', route: '/info'},
@@ -125,6 +110,9 @@ export default {
         this.$vuetify.theme.dark = this.isDarkModeEnabled
       },
       immediate: true
+    },
+    inputData: function() {
+      this.$store.dispatch('products/loadProducts', `/ru/search?query=${this.inputData}`)
     }
   },
   methods: {
