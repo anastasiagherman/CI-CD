@@ -89,10 +89,7 @@
                 v-model="isDarkMode"
                 inset
                 :label="`Dark mode`"
-                @change="() => {$store.dispatch('darkMode/changeMode', !$vuetify.theme.dark);
-                                $vuetify.theme.dark = $store.getters['darkMode/getIsDarkModeEnabled'];
-                }
-                "
+                @change="changeDarkMode"
               />
             </v-sheet>
           </v-list>
@@ -103,10 +100,11 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   name: "NavBar",
   data: () => ({
-    isDarkMode: () => this.$store.getters['darkMode/getIsDarkModeEnabled'],
+    isDarkMode: () => this.$store.getters['settings/getIsDarkModeEnabled'],
     links: [
       {title: 'Home', route: '/'},
       {title: 'Info', route: '/info'},
@@ -118,8 +116,21 @@ export default {
       { title: 'Logout', icon: 'fas fa-sign-out-alt'},
     ],
   }),
-  mounted() {
-    this.$vuetify.theme.dark = this.$store.getters['darkMode/getIsDarkModeEnabled'];
+  computed: mapGetters({
+    isDarkModeEnabled: 'settings/getIsDarkModeEnabled'
+  }),
+  watch: {
+    isDarkModeEnabled: {
+      handler() {
+        this.$vuetify.theme.dark = this.isDarkModeEnabled
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    changeDarkMode() {
+      this.$store.commit('settings/mutateIsDarkModeEnabled', !this.isDarkModeEnabled);
+    }
   }
 }
 </script>
