@@ -92,7 +92,6 @@ name: "Products",
   },
   methods: {
   loadMore: function() {
-    console.log(1);
     this.$store.dispatch('products/loadProducts', {
       link: this.link,
       page: ++this.page
