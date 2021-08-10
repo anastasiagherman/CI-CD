@@ -25,6 +25,7 @@
                 <v-list-item-content>
                   <v-list-item-title class="text-wrap">
                     <router-link
+                      class="text--primary"
                       :to="{href:'/products', query: {link: linkChild.link}}"
                     >
                       {{ linkChild.name }}
@@ -51,5 +52,8 @@ export default {
 </script>
 
 <style scoped>
+.v-list-item__title a {
+  text-decoration: none;
+}
 
 </style>

@@ -12,10 +12,19 @@ export default {
         getIsLoading: (state) => state.isLoading
     },
     actions: {
-        async loadProducts(store, payload) {
+        async loadProducts(store, {link, page}) {
             store.commit('mutateIsLoading', true);
-            const result = await fetch(`/api/products?link=${payload}`);
-            store.commit('mutateList',await result.json());
+            let result;
+            if(link.includes('&')) {
+                result = await fetch(`/api/products?link=${link}&page=${page}`);
+            } else {
+                result = await fetch(`/api/products?link=${link}?page=${page}`);
+            }
+            if(page > 1) {
+                store.commit('mutateAddList', await result.json());
+            } else {
+                store.commit('mutateList',await result.json());
+            }
             store.commit('mutateIsLoading', false);
         },
 
@@ -26,6 +35,9 @@ export default {
         },
         mutateIsLoading(state, payload) {
             state.isLoading = payload;
+        },
+        mutateAddList(state, payload) {
+            state.list = state.list.concat(payload);
         }
     }
 }
