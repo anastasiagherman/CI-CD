@@ -1,24 +1,28 @@
 <template>
   <v-responsive max-width="260">
-    <v-text-field
-      dense
-      flat
-      hide-details
-      rounded
-      solo-inverted
-      :value="value"
-      @keypress="$emit('input', $event.target.value)"
+    <form
+      @submit="onSubmit"
     >
-      <template v-slot:label>
-        <v-icon
-          style="vertical-align: middle"
-          size="20"
-        >
-          fas fa-search
-        </v-icon>
-        Search for products
-      </template>
-    </v-text-field>
+      <v-text-field
+        dense
+        flat
+        hide-details
+        rounded
+        solo-inverted
+        :value="value"
+        @keypress="$emit('input', $event.target.value)"
+      >
+        <template v-slot:label>
+          <v-icon
+            style="vertical-align: middle"
+            size="20"
+          >
+            fas fa-search
+          </v-icon>
+          Search for products
+        </template>
+      </v-text-field>
+    </form>
   </v-responsive>
 </template>
 
@@ -30,6 +34,12 @@ name: "Search",
     type: String,
     required: false,
     default: ''
+  }
+  },
+  methods: {
+  onSubmit(e) {
+    e.preventDefault();
+    this.$emit('onEnterPress', this.value);
   }
   }
 }

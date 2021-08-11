@@ -23,28 +23,8 @@
         <v-row class="justify-center" />
         <v-row v-if="$store.getters['products/getIsLoading']">
           <v-col
-            cols="12"
-            md="4"
-          >
-            <v-skeleton-loader
-              class="mb-6"
-              :boilerplate="true"
-              :elevation="2"
-              type="card-avatar, actions"
-            />
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-skeleton-loader
-              class="mb-6"
-              :boilerplate="true"
-              :elevation="2"
-              type="card-avatar, actions"
-            />
-          </v-col>
-          <v-col
+            v-for="index in 80"
+            :key="index"
             cols="12"
             md="4"
           >

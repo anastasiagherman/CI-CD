@@ -29,6 +29,7 @@
       <v-spacer />
       <Search
         v-model="inputData"
+        @onEnterPress="onEnterPress"
       />
       <v-spacer />
       <v-icon>
@@ -111,13 +112,18 @@ export default {
       },
       immediate: true
     },
-    inputData: function() {
-      this.$store.dispatch('products/loadProducts', `/ru/search?query=${this.inputData}`)
-    }
   },
   methods: {
     changeDarkMode() {
       this.$store.commit('settings/mutateIsDarkModeEnabled', !this.isDarkModeEnabled);
+    },
+    onEnterPress() {
+      this.$router.push({
+        path: '/products',
+        query: {
+          link: `/ru/search?query=${this.inputData}`
+        }
+      })
     }
   }
 }
