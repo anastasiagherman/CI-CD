@@ -27,10 +27,7 @@
       </v-btn>
 
       <v-spacer />
-      <Search
-        v-model="inputData"
-        @onEnterPress="onEnterPress"
-      />
+      <Search />
       <v-spacer />
       <v-icon>
         fas fa-shopping-cart fa-2x
@@ -117,14 +114,6 @@ export default {
     changeDarkMode() {
       this.$store.commit('settings/mutateIsDarkModeEnabled', !this.isDarkModeEnabled);
     },
-    onEnterPress() {
-      this.$router.push({
-        path: '/products',
-        query: {
-          link: `/ru/search?query=${this.inputData}`
-        }
-      })
-    }
   }
 }
 </script>
