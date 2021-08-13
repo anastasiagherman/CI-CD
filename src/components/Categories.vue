@@ -42,11 +42,20 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
 export default {
   name: "Categories",
   mounted() {
-    if(!this.$store.getters['categories/getList'].length)
-    this.$store.dispatch('categories/fetchCategories');
+    if(!this.getList().length)
+    this.fetchCategories();
+  },
+  methods: {
+    ...mapActions({
+      fetchCategories: 'categories/fetchCategories'
+    }),
+    ...mapGetters({
+      getList: 'categories/getList'
+    })
   }
 }
 </script>

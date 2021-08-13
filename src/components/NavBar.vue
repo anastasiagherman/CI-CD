@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 import Search from "./pages/Search";
 export default {
   name: "NavBar",
@@ -112,8 +112,11 @@ export default {
   },
   methods: {
     changeDarkMode() {
-      this.$store.commit('settings/mutateIsDarkModeEnabled', !this.isDarkModeEnabled);
+      this.mutateIsDarkModeEnabled(!this.isDarkModeEnabled);
     },
+    ...mapMutations({
+      mutateIsDarkModeEnabled: 'settings/mutateIsDarkModeEnabled'
+    })
   }
 }
 </script>

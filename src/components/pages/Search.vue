@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
 name: "Search",
   data: () => ({
@@ -41,7 +42,7 @@ name: "Search",
   }),
   watch: {
     search () {
-      this.$store.dispatch('products/searchProducts', this.search);
+      this.searchProducts(this.search);
     },
   },
   methods: {
@@ -63,7 +64,10 @@ name: "Search",
         }
       })
     }
-    }
+    },
+    ...mapActions({
+      searchProducts: 'products/searchProducts'
+    })
   }
 }
 </script>

@@ -43,6 +43,7 @@
 
 <script>
 import ProductsItem from "./ProductsItem";
+import {mapActions} from 'vuex';
 export default {
 name: "Products",
   components: {ProductsItem},
@@ -63,7 +64,7 @@ name: "Products",
       immediate: true,
       handler() {
         this.page = 1;
-        this.$store.dispatch('products/loadProducts', {
+        this.loadProducts({
           link: this.link,
           page: this.page
         });
@@ -72,11 +73,14 @@ name: "Products",
   },
   methods: {
   loadMore: function() {
-    this.$store.dispatch('products/loadProducts', {
+    this.loadProducts({
       link: this.link,
       page: ++this.page
     });
-  }
+  },
+    ...mapActions({
+      loadProducts: 'products/loadProducts'
+    }),
   }
 }
 </script>
