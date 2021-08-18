@@ -1,14 +1,14 @@
 <template>
   <v-responsive max-width="260">
     <v-autocomplete
-      v-model="value"
+      value="value"
       dense
       flat
       hide-details
       rounded
       solo-inverted
-      :items="$store.getters['products/getSearchSuggestions']"
-      :loading="$store.getters['products/getIsSearchLoading']"
+      :items="items"
+      :loading="loading"
       :search-input.sync="search"
       color="white"
       hide-no-data
@@ -16,8 +16,8 @@
       item-text="title"
       item-value="url"
       return-object
-      @change="onChange"
-      @keydown.enter="onSubmit"
+      @change="$emit('onChange', $event)"
+      @keydown.enter="$emit('onSubmit', $event)"
     >
       <template v-slot:label>
         <v-icon
@@ -33,41 +33,42 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
 export default {
 name: "Search",
+
+  props: {
+    value: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    items: {
+      type: Array,
+      required: false,
+      default: () => []
+    },
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
   data: () => ({
-    search: null,
-    value: {}
+    search: '',
   }),
   watch: {
     search () {
-      this.searchProducts(this.search);
+      this.$emit('input', this.search);
     },
+    value: {
+      handler() {
+        this.search = this.value;
+      },
+      immediate: true
+    }
   },
   methods: {
-  onSubmit(e) {
-    e.preventDefault();
-    this.$router.push({
-      path: '/products',
-      query: {
-        link: `/ru/search?query=${this.search}`
-      }
-    })
-  },
-    onChange() {
-    if(this.value){
-      this.$router.push({
-        path: '/products',
-        query: {
-          link: this.value.url
-        }
-      })
-    }
-    },
-    ...mapActions({
-      searchProducts: 'products/searchProducts'
-    })
+
   }
 }
 </script>

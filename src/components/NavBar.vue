@@ -27,7 +27,13 @@
       </v-btn>
 
       <v-spacer />
-      <Search />
+      <Search
+        v-model="search"
+        :items="$store.getters['products/getSearchSuggestions']"
+        :loading="$store.getters['products/getIsSearchLoading']"
+        @onSubmit="onSubmit"
+        @onChange="onChange"
+      />
       <v-spacer />
       <v-icon>
         fas fa-shopping-cart fa-2x
@@ -81,13 +87,14 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters, mapMutations, mapActions} from 'vuex';
 import Search from "./pages/Search";
 export default {
   name: "NavBar",
   components: {Search},
   data: () => ({
     inputData: '',
+    search: '',
     links: [
       {title: 'Home', route: '/'},
       {title: 'Info', route: '/info'},
@@ -109,11 +116,35 @@ export default {
       },
       immediate: true
     },
+    search() {
+      this.searchProducts(this.search);
+    }
   },
   methods: {
     changeDarkMode() {
       this.mutateIsDarkModeEnabled(!this.isDarkModeEnabled);
     },
+    onSubmit() {
+      this.$router.push({
+        path: '/products',
+        query: {
+          link: `/ru/search?query=${this.search}`
+        }
+      })
+    },
+    onChange(e) {
+      if(this.search) {
+        this.$router.push({
+          path: '/products',
+          query: {
+            link: e.url
+          }
+        })
+      }
+    },
+    ...mapActions({
+      searchProducts: 'products/searchProducts'
+    }),
     ...mapMutations({
       mutateIsDarkModeEnabled: 'settings/mutateIsDarkModeEnabled'
     })

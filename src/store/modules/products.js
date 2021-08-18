@@ -16,8 +16,9 @@ export default {
         async loadProducts(store, {link, page}) {
             store.commit('mutateIsLoading', true);
             let result;
-            let querySymbol = link.includes('?') ? '&' : '?'
-            result = await fetch(`/api/products?link=${link}${querySymbol}page=${page}`);
+            let querySymbol = link.includes('?') ? '&' : '?';
+            const params = btoa(`${link}${querySymbol}page=${page}`);
+            result = await fetch(`/api/products?linkBase64=${params}`);
             if(page > 1) {
                 store.commit('mutateAddList', await result.json());
             } else {
