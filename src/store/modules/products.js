@@ -20,10 +20,12 @@ export default {
             let querySymbol = link.includes('?') ? '&' : '?';
             const params = encode(`${link}${querySymbol}page=${page}`);
             result = await fetch(`/api/products?linkBase64=${params}`);
+            result = await result.json();
+            store.commit('productHistory/mutateItem', result, { root: true });
             if(page > 1) {
-                store.commit('mutateAddList', await result.json());
+                store.commit('mutateAddList', result);
             } else {
-                store.commit('mutateList',await result.json());
+                store.commit('mutateList', result);
             }
             store.commit('mutateIsLoading', false);
         },
