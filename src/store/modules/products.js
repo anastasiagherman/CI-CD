@@ -1,3 +1,4 @@
+import { encode } from 'js-base64';
 export default {
     namespaced: true,
     state: {
@@ -17,7 +18,7 @@ export default {
             store.commit('mutateIsLoading', true);
             let result;
             let querySymbol = link.includes('?') ? '&' : '?';
-            const params = btoa(`${link}${querySymbol}page=${page}`);
+            const params = encode(`${link}${querySymbol}page=${page}`);
             result = await fetch(`/api/products?linkBase64=${params}`);
             if(page > 1) {
                 store.commit('mutateAddList', await result.json());
