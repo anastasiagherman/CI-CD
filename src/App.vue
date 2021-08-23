@@ -6,7 +6,7 @@
         fluid
       >
         <v-row>
-          <Categories />
+          <Categories class="hidden-md-and-down" />
           <v-col>
             <v-sheet
               min-height="70vh"

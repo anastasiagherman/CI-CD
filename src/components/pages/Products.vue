@@ -6,6 +6,7 @@
       >
         Products
       </v-row>
+      <Categories class="hidden-lg-and-up col-md-12 col-12" />
       <div
         v-infinite-scroll="loadMore"
         :infinite-scroll-disabled="$store.getters['products/getIsLoading']"
@@ -15,7 +16,9 @@
           <v-col
             v-for="(item, i) in $store.getters['products/getList']"
             :key="item.link + i"
-            cols="4"
+            cols="12"
+            sm="6"
+            md="4"
           >
             <ProductsItem :item="item" />
           </v-col>
@@ -44,9 +47,10 @@
 <script>
 import ProductsItem from "./ProductsItem";
 import {mapActions} from 'vuex';
+import Categories from "./../Categories";
 export default {
 name: "Products",
-  components: {ProductsItem},
+  components: {ProductsItem, Categories},
   props: {
   link: {
     required: false,
