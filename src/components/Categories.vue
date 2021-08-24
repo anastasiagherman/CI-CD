@@ -9,32 +9,28 @@
       focusable
     >
       <v-expansion-panel
-        v-for="(link, i) in $store.getters['categories/getList']"
-        :key="i"
+        v-for="category in categories"
+        :key="category.name"
       >
-        <div v-if="!link.parentLink">
-          <v-expansion-panel-header>{{ link.name }}</v-expansion-panel-header>
-          <div
-            v-for="(linkChild, j) in $store.getters['categories/getList']"
-            :key="j"
-          >
-            <v-expansion-panel-content
-              v-if="linkChild.parentLink === link.link"
-            >
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="text-wrap">
-                    <router-link
-                      class="text--primary"
-                      :to="{name:'products', query: {link: linkChild.link}}"
-                    >
-                      {{ linkChild.name }}
-                    </router-link>
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-expansion-panel-content>
-          </div>
+        <v-expansion-panel-header>{{ category.name }}</v-expansion-panel-header>
+        <div
+          v-for="linkChild in category.children"
+          :key="linkChild.link"
+        >
+          <v-expansion-panel-content>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="text-wrap">
+                  <router-link
+                    class="text--primary"
+                    :to="{name:'products', query: {link: linkChild.link}}"
+                  >
+                    {{ linkChild.name }}
+                  </router-link>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-expansion-panel-content>
         </div>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -45,17 +41,33 @@
 import {mapActions, mapGetters} from 'vuex'
 export default {
   name: "Categories",
+  computed: {
+    categories(){
+      let categories={};
+      for(let category of this.getCategories){
+        if(!category.parentLink){
+          categories[category.link]= {
+            children:[],
+            ...category
+          }
+        }else{
+          categories[category.parentLink].children.push(category)
+        }
+      }
+      return categories
+    },
+    ...mapGetters({
+      getCategories: 'categories/getList'
+    })
+  },
   mounted() {
-    if(!this.getList().length)
+    if(!this.getCategories.length)
     this.fetchCategories();
   },
   methods: {
     ...mapActions({
       fetchCategories: 'categories/fetchCategories'
     }),
-    ...mapGetters({
-      getList: 'categories/getList'
-    })
   }
 }
 </script>
