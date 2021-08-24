@@ -65,26 +65,7 @@
                 </v-icon>
               </v-avatar>
             </template>
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in items"
-                :key="index"
-              >
-                <v-list-item-icon>
-                  <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-              <v-divider class="my-2" />
-              <v-sheet class="pa-5">
-                <v-switch
-                  v-model="$vuetify.theme.dark"
-                  inset
-                  :label="`Dark mode`"
-                  @change="changeDarkMode"
-                />
-              </v-sheet>
-            </v-list>
+            <Account />
           </v-menu>
         </div>
       </v-container>
@@ -94,32 +75,19 @@
       fixed
       temporary
     >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group>
-          <v-list-item
-            v-for="(link, i) in mobileLinks"
-            :key="link.route + i"
-            :to="link.route"
-            text
-          >
-            <v-list-item-icon><v-icon>{{ link.icon }}</v-icon></v-list-item-icon>
-            <v-list-item-title>{{ link.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
+      <Categories class="col-md-12 col-12" />
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapMutations, mapActions} from 'vuex';
+import {mapActions} from 'vuex';
 import Search from "./pages/Search";
+import Categories from "./Categories";
+import Account from "./pages/Account";
 export default {
   name: "NavBar",
-  components: {Search},
+  components: {Account, Categories, Search},
   data: () => ({
     inputData: '',
     search: '',
@@ -129,34 +97,15 @@ export default {
       {title: 'Info', route: '/info', icon: 'mdi-information-outline'},
       {title: 'Contacts', route: '/contacts', icon: 'mdi-book-open-blank-variant'},
     ],
-    items: [
-      { title: 'Sign in', icon: 'fas fa-sign-in-alt', route: ''},
-      { title: 'Register', icon: 'fas fa-sign-in-alt', route: ''},
-      { title: 'Logout', icon: 'fas fa-sign-out-alt', route: ''},
-    ],
   }),
   computed: {
-    mobileLinks() {
-      return this.links.concat(this.items, [{title: 'Cart', icon: 'mdi-cart', route: ''}]);
     },
-    ...mapGetters({
-    isDarkModeEnabled: 'settings/getIsDarkModeEnabled'
-  })},
   watch: {
-    isDarkModeEnabled: {
-      handler() {
-        this.$vuetify.theme.dark = this.isDarkModeEnabled
-      },
-      immediate: true
-    },
     search() {
       this.searchProducts(this.search);
     },
   },
   methods: {
-    changeDarkMode() {
-      this.mutateIsDarkModeEnabled(!this.isDarkModeEnabled);
-    },
     onSubmit() {
       this.$router.push({
         path: '/products',
@@ -178,9 +127,6 @@ export default {
     ...mapActions({
       searchProducts: 'products/searchProducts'
     }),
-    ...mapMutations({
-      mutateIsDarkModeEnabled: 'settings/mutateIsDarkModeEnabled'
-    })
   }
 }
 </script>

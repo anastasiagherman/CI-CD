@@ -17,6 +17,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <BottomNavigationMobile class="hidden-lg-and-up" />
     </v-main>
   </v-app>
 </template>
@@ -25,10 +26,20 @@
 import NavBar from "./components/NavBar";
 import Categories from "./components/Categories";
 import Content from "./components/Content";
+import BottomNavigationMobile from "./components/pages/BottomNavigationMobile";
+import {mapGetters} from "vuex";
 export default {
-  components: {Content, Categories, NavBar},
+  components: {BottomNavigationMobile, Content, Categories, NavBar},
   data: () => ({
 
   }),
+  computed: {
+    ...mapGetters({
+      isDarkModeEnabled: 'settings/getIsDarkModeEnabled'
+    })
+  },
+  mounted() {
+    this.$vuetify.theme.dark = this.isDarkModeEnabled
+  }
 }
 </script>
