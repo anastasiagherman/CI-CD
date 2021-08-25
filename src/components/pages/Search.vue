@@ -1,5 +1,5 @@
 <template>
-  <v-responsive max-width="260">
+  <v-responsive :max-width="maxWidth">
     <v-autocomplete
       value="value"
       dense
@@ -56,6 +56,15 @@ name: "Search",
   data: () => ({
     search: '',
   }),
+  computed: {
+    maxWidth() {
+      if(this.$vuetify.breakpoint.name === 'xs') {
+        return 190;
+      }else {
+        return 260;
+      }
+    }
+  },
   watch: {
     search () {
       this.$emit('input', this.search);

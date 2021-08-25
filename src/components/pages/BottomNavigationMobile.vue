@@ -47,6 +47,7 @@ export default {
 <style scoped>
 .bottomNav {
   position: sticky;
+  z-index: 5;
 }
 
 </style>

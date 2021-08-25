@@ -85,6 +85,7 @@ import {mapActions} from 'vuex';
 import Search from "./pages/Search";
 import Categories from "./Categories";
 import Account from "./pages/Account";
+
 export default {
   name: "NavBar",
   components: {Account, Categories, Search},
@@ -98,11 +99,9 @@ export default {
       {title: 'Contacts', route: '/contacts', icon: 'mdi-book-open-blank-variant'},
     ],
   }),
-  computed: {
-    },
   watch: {
     search() {
-      this.searchProducts(this.search);
+        this.searchProducts(this.search);
     },
   },
   methods: {
@@ -125,7 +124,7 @@ export default {
       }
     },
     ...mapActions({
-      searchProducts: 'products/searchProducts'
+      searchProducts: 'products/searchProducts',
     }),
   }
 }

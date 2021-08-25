@@ -4,8 +4,6 @@
       rounded="lg"
       elevation="3"
       outlined
-      class="ma-16"
-      max-width="950"
     >
       <div v-if="isLoading">
         <v-skeleton-loader
@@ -22,8 +20,6 @@
               cycle
               hide-delimiter-background
               show-arrows-on-hover
-              reverse-transition="fade-transition"
-              transition="fade-transition"
             >
               <v-carousel-item
                 v-for="(image, i) in item.img"
@@ -61,8 +57,14 @@
                         <v-list-item-content>
                           <v-list-item-title
                             v-if="characteristic.value"
-                            v-text="formatCharacteristics(characteristic.name) + characteristic.value"
-                          />
+                          >
+                            <div class="feature">
+                              <div>{{ characteristic.name }}</div>
+                              <div class="dotted hidden-xs-only" />
+                              <v-spacer class="hidden-sm-and-up" />
+                              <div>{{ characteristic.value }}</div>
+                            </div>
+                          </v-list-item-title>
                           <v-list-item-title
                             v-else
                             v-text="characteristic.name"
@@ -88,8 +90,14 @@
                         <v-list-item-content>
                           <v-list-item-title
                             v-if="characteristic.value"
-                            v-text="formatCharacteristics(characteristic.name) + characteristic.value"
-                          />
+                          >
+                            <div class="feature">
+                              <div>{{ characteristic.name }}</div>
+                              <div class="dotted hidden-xs-only" />
+                              <v-spacer class="hidden-sm-and-up" />
+                              <div>{{ characteristic.value }}</div>
+                            </div>
+                          </v-list-item-title>
                           <v-list-item-title
                             v-else
                             v-text="characteristic.name"
@@ -166,5 +174,22 @@ name: "Item",
 </script>
 
 <style scoped>
+@media only screen and (max-width: 500px) {
+  .feature {
+    font-size: 12px;
+    white-space: pre-wrap;
+  }
+}
+div .dotted {
+  width: 100%;
+  border-bottom: 2px dotted;
+  margin: 0 10px;
+  position: relative;
+  top: -3px;
+}
+div .feature {
+  display: flex;
+}
+
 
 </style>
