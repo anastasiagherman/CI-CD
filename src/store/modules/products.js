@@ -1,26 +1,27 @@
 import { encode } from 'js-base64';
+import {fetchSuggestions, fetchProducts} from "../../api/999";
+
 export default {
     namespaced: true,
     state: {
         list: [],
         isLoading: false,
-        search: {},
+        search: [],
         isSearchLoading: false,
     },
     getters: {
         getList: (state) =>state.list,
         getIsLoading: (state) => state.isLoading,
-        getSearchSuggestions: (state) => state.search?.suggestions ?? [],
+        getSearchSuggestions: (state) => state.search ?? [],
         getIsSearchLoading: (state) => state.isSearchLoading
     },
     actions: {
         async loadProducts(store, {link, page}) {
             store.commit('mutateIsLoading', true);
-            let result;
             let querySymbol = link.includes('?') ? '&' : '?';
             const params = encode(`${link}${querySymbol}page=${page}`);
-            result = await fetch(`/api/products?linkBase64=${params}`);
-            result = await result.json();
+            let result = await fetchProducts(params);
+            result = await result.data;
             store.commit('productHistory/mutateItem', result, { root: true });
             if(page > 1) {
                 store.commit('mutateAddList', result);
@@ -31,8 +32,8 @@ export default {
         },
         async searchProducts(store, payload) {
             store.commit('mutateIsSearchLoading', true);
-            let result = await fetch(`/api/suggestions?query=${payload}`);
-            store.commit('mutateSearchList', await result.json());
+            let result = await fetchSuggestions(payload);
+            store.commit('mutateSearchList', await result.data?.suggestions);
             store.commit('mutateIsSearchLoading', false);
         }
 

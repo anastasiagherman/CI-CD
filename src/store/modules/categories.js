@@ -1,3 +1,5 @@
+import {fetchCategories} from "../../api/999";
+
 export default {
     namespaced: true,
     state: {
@@ -13,8 +15,8 @@ export default {
     actions: {
         async fetchCategories({commit}) {
             commit('mutateLoading', true);
-            const result = await fetch('/api/categories');
-            commit('mutateList', await result.json());
+            const result = await fetchCategories();
+            commit('mutateList', await result.data);
             commit('mutateLoading', false);
         }
     },
