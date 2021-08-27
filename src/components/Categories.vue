@@ -1,7 +1,7 @@
 <template>
   <v-col cols="2">
     <v-progress-linear
-      v-if="$store.getters['categories/getIsLoading']"
+      v-if="getIsLoading"
       indeterminate
       color="yellow darken-2"
     />
@@ -57,7 +57,8 @@ export default {
       return categories
     },
     ...mapGetters({
-      getCategories: 'categories/getList'
+      getCategories: 'categories/getList',
+      getIsLoading: 'categories/getIsLoading'
     })
   },
   mounted() {

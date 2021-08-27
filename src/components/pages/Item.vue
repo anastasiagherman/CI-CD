@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-icon
+      class="ma-5 hidden-lg-and-up"
+      @click="goBack"
+    >
+      mdi-arrow-left
+    </v-icon>
     <v-sheet
       rounded="lg"
       elevation="3"
@@ -20,6 +26,7 @@
               cycle
               hide-delimiter-background
               show-arrows-on-hover
+              :hide-delimiters="isMobile"
             >
               <v-carousel-item
                 v-for="(image, i) in item.img"
@@ -154,6 +161,11 @@ name: "Item",
       return this.item.location
       .map(({name}) => name)
       .join(', ')
+    },
+    isMobile() {
+      return (this.$vuetify.breakpoint.name === 'md' ||
+      this.$vuetify.breakpoint.name === 'sm' ||
+      this.$vuetify.breakpoint.name === 'xs');
     }
   },
   created() {
@@ -166,8 +178,8 @@ name: "Item",
   ...mapActions({
     loadItem: 'item/loadItem'
   }),
-    formatCharacteristics(string) {
-    return string.padEnd(70 - string.length, '.');
+    goBack() {
+    this.$router.back();
     }
   }
 }

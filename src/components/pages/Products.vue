@@ -8,12 +8,12 @@
       </v-row>
       <div
         v-infinite-scroll="loadMore"
-        :infinite-scroll-disabled="$store.getters['products/getIsLoading']"
+        :infinite-scroll-disabled="getIsLoading"
         infinite-scroll-distance="10"
       >
         <v-row>
           <v-col
-            v-for="(item, i) in $store.getters['products/getList']"
+            v-for="(item, i) in getList"
             :key="item.link + i"
             cols="12"
             sm="6"
@@ -24,7 +24,7 @@
           </v-col>
         </v-row>
         <v-row class="justify-center" />
-        <v-row v-if="$store.getters['products/getIsLoading']">
+        <v-row v-if="getIsLoading">
           <v-col
             v-for="index in 80"
             :key="index"
@@ -46,7 +46,7 @@
 
 <script>
 import ProductsItem from "./ProductsItem";
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 export default {
 name: "Products",
   components: {ProductsItem},
@@ -62,6 +62,12 @@ name: "Products",
     selection: 1,
     page: 1,
   }),
+  computed: {
+  ...mapGetters({
+    getIsLoading: 'products/getIsLoading',
+    getList: 'products/getList'
+  })
+  },
   watch: {
     link: {
       immediate: true,

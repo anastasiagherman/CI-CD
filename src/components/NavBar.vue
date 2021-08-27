@@ -33,8 +33,8 @@
         <v-spacer />
         <Search
           v-model="search"
-          :items="$store.getters['products/getSearchSuggestions']"
-          :loading="$store.getters['products/getIsSearchLoading']"
+          :items="getSearchSuggestions"
+          :loading="getIsSearchLoading"
           @onSubmit="onSubmit"
           @onChange="onChange"
         />
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import Search from "./pages/Search";
 import Categories from "./Categories";
 import Account from "./pages/Account";
@@ -99,6 +99,12 @@ export default {
       {title: 'Contacts', route: '/contacts', icon: 'mdi-book-open-blank-variant'},
     ],
   }),
+  computed: {
+    ...mapGetters({
+      getSearchSuggestions: 'products/getSearchSuggestions',
+      getIsSearchLoading: 'products/getIsSearchLoading'
+    })
+  },
   watch: {
     search() {
         this.searchProducts(this.search);
