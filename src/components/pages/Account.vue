@@ -7,7 +7,12 @@
       <v-list-item-icon>
         <v-icon>{{ item.icon }}</v-icon>
       </v-list-item-icon>
-      <v-list-item-title>{{ item.title }}</v-list-item-title>
+      <router-link
+        :to="{name: item.route}"
+        style="text-decoration: none"
+      >
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
+      </router-link>
     </v-list-item>
     <v-divider class="my-2" />
     <v-sheet class="pa-5">
@@ -28,7 +33,7 @@ export default {
   name: "Account",
   data: () => ({
     items: [
-      { title: 'Sign in', icon: 'fas fa-sign-in-alt', route: ''},
+      { title: 'Sign in', icon: 'fas fa-sign-in-alt', route: 'auth'},
       { title: 'Register', icon: 'fas fa-sign-in-alt', route: ''},
       { title: 'Logout', icon: 'fas fa-sign-out-alt', route: ''},
     ],
