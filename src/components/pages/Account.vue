@@ -10,6 +10,7 @@
       <router-link
         :to="{name: item.route}"
         style="text-decoration: none"
+        class="text--primary"
       >
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </router-link>
@@ -33,10 +34,11 @@ export default {
   name: "Account",
   data: () => ({
     items: [
-      { title: 'Sign in', icon: 'fas fa-sign-in-alt', route: 'auth'},
-      { title: 'Register', icon: 'fas fa-sign-in-alt', route: ''},
+      { title: 'Sign in', icon: 'fas fa-sign-in-alt', route: 'login'},
+      { title: 'Register', icon: 'fas fa-sign-in-alt', route: 'register'},
       { title: 'Logout', icon: 'fas fa-sign-out-alt', route: ''},
     ],
+    isAuthenticated: false,
   }),
   computed: {
     ...mapGetters({
