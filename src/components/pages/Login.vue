@@ -35,6 +35,7 @@
       <v-btn
         color="grey darken-2"
         large
+        @click="login"
       >
         Enter
       </v-btn>
@@ -56,6 +57,7 @@
   </v-card>
 </template>
 <script>
+import {mapActions} from 'vuex';
 export default {
 name: "Login",
   data() {
@@ -64,6 +66,20 @@ name: "Login",
       password: '',
     }
   },
+  methods: {
+  login() {
+    this.loginUser({
+      username: this.username,
+      password: this.password
+    });
+    this.$router.push({
+      name: 'products'
+    })
+  },
+    ...mapActions({
+      loginUser: 'auth/login'
+    })
+  }
 }
 </script>
 

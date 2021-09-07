@@ -40,10 +40,6 @@ export default {
   },
   mounted() {
     this.$vuetify.theme.dark = this.isDarkModeEnabled
-  },
-  beforeRouteEnter(to, from, next) {
-    if(localStorage.getItem('isAuthenticated')) next({name: 'login'})
-    else next()
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-list>
     <v-list-item
-      v-for="(item, index) in items"
+      v-for="(item, index) in filterItems"
       :key="index"
     >
       <v-list-item-icon>
@@ -12,7 +12,14 @@
         style="text-decoration: none"
         class="text--primary"
       >
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <div v-if="item.title === 'Logout'">
+          <v-list-item-title @click="logout">
+            {{ item.title }}
+          </v-list-item-title>
+        </div>
+        <div v-else>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </div>
       </router-link>
     </v-list-item>
     <v-divider class="my-2" />
@@ -28,7 +35,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from "vuex";
+import {mapGetters, mapMutations, mapActions} from "vuex";
 
 export default {
   name: "Account",
@@ -41,8 +48,15 @@ export default {
     isAuthenticated: false,
   }),
   computed: {
+    filterItems() {
+      if(this.getIsAuthorised) {
+        return this.items.filter(item => item.title !== 'Sign in' && item.title !== 'Register');
+      }
+      return this.items.filter(item => item.title !== 'Logout');
+    },
     ...mapGetters({
-      isDarkModeEnabled: 'settings/getIsDarkModeEnabled'
+      isDarkModeEnabled: 'settings/getIsDarkModeEnabled',
+      getIsAuthorised: 'auth/getIsAuthorised',
     })
   },
   watch: {
@@ -57,8 +71,17 @@ export default {
     changeDarkMode() {
       this.mutateIsDarkModeEnabled(!this.isDarkModeEnabled);
     },
+    logout() {
+      this.logoutUser();
+      this.$router.push({
+        name: 'login'
+      })
+    },
     ...mapMutations({
       mutateIsDarkModeEnabled: 'settings/mutateIsDarkModeEnabled'
+    }),
+    ...mapActions({
+      logoutUser: 'auth/logout',
     })
   },
 }
