@@ -137,6 +137,9 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import eventBus from "../../eventBus";
+import {ERROR_MESSAGE} from "../../constants/eventBus";
+
 export default {
 name: "Item",
   props: {
@@ -169,7 +172,7 @@ name: "Item",
     }
   },
   created() {
-  this.loadItem(this.id);
+  this.loadItem(this.id).catch((e) => eventBus.$emit(ERROR_MESSAGE, e));
   },
   mounted() {
   window.scroll(0, 0);

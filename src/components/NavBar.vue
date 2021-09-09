@@ -85,6 +85,8 @@ import {mapActions, mapGetters} from 'vuex';
 import Search from "./pages/Search";
 import Categories from "./Categories";
 import Account from "./pages/Account";
+import eventBus from "../eventBus";
+import {ERROR_MESSAGE} from "../constants/eventBus";
 
 export default {
   name: "NavBar",
@@ -107,7 +109,8 @@ export default {
   },
   watch: {
     search() {
-        this.searchProducts(this.search);
+        this.searchProducts(this.search)
+        .catch((e) => eventBus.$emit(ERROR_MESSAGE, e));
     },
   },
   methods: {

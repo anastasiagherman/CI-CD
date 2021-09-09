@@ -5,6 +5,7 @@ import router from "./routes";
 import store from "./store";
 import './plugins/infinteScroll';
 import './guards';
+import './interceptors';
 
 Vue.config.productionTip = false
 
