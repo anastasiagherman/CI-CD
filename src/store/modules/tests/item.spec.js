@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 })
 
 describe('item', () => {
-    it('should have default value false', () => {
+    it('should have default value', () => {
         expect(store.getters['item/getIsLoading']).toBeFalsy();
         expect(Object.keys(store.getters['item/getItem'])).toHaveLength(0);
     })

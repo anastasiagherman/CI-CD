@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 })
 
 describe('categories', () => {
-    it('should have default value false', () => {
+    it('should have default value', () => {
         expect(store.getters['categories/getIsLoading']).toBeFalsy();
         expect(store.getters['categories/getList']).toHaveLength(0);
     })

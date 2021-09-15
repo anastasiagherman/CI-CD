@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 })
 
 describe('products', () => {
-    it('should be an empty array', () => {
+    it('should have default value', () => {
         expect(store.getters['products/getList']).toHaveLength(0);
         expect(store.getters['products/getSearchSuggestions']).toHaveLength(0);
         expect(store.getters['products/getIsLoading']).toBeFalsy();

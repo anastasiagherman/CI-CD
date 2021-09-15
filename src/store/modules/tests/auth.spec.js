@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 })
 
 describe('auth', () => {
-    it('should have default value false', () => {
+    it('should have default value', () => {
         expect(store.getters['auth/getIsAuthorised']).toBeFalsy();
         expect(store.getters['auth/getUsername']).toBe('');
     })
