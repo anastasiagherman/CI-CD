@@ -1,10 +1,11 @@
+export const state = {
+    items: {}
+}
 export default {
     namespaced: true,
-    state: {
-        items: {}
-    },
+    state,
     getters: {
-        getItem: (state) => (id) => state.items[id]
+        getItem: (state) => state.items
     },
     actions: {
 
