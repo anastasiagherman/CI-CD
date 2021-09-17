@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1631818297714" clover="3.2.0">
-  <project timestamp="1631818297714" name="All files">
-    <metrics statements="62" coveredstatements="62" conditionals="10" coveredconditionals="10" methods="31" coveredmethods="31" elements="103" coveredelements="103" complexity="0" loc="62" ncloc="62" packages="1" files="6" classes="6"/>
+<coverage generated="1631896290111" clover="3.2.0">
+  <project timestamp="1631896290111" name="All files">
+    <metrics statements="62" coveredstatements="62" conditionals="10" coveredconditionals="10" methods="32" coveredmethods="32" elements="104" coveredelements="104" complexity="0" loc="62" ncloc="62" packages="1" files="6" classes="6"/>
     <file name="auth.js" path="C:\Users\cociobanu\Documents\simple_store_front\src\store\modules\auth.js">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
       <line num="8" count="3" type="stmt"/>
@@ -38,9 +38,9 @@
       <line num="27" count="3" type="stmt"/>
     </file>
     <file name="productHistory.js" path="C:\Users\cociobanu\Documents\simple_store_front\src\store\modules\productHistory.js">
-      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
       <line num="1" count="1" type="stmt"/>
-      <line num="8" count="1" type="stmt"/>
+      <line num="8" count="3" type="stmt"/>
       <line num="15" count="3" type="stmt"/>
       <line num="16" count="3" type="stmt"/>
       <line num="17" count="3" type="stmt"/>

@@ -5,7 +5,7 @@ export default {
     namespaced: true,
     state,
     getters: {
-        getItem: (state) => state.items
+        getItem: (state) => (id) => state.items[id]
     },
     actions: {
 
