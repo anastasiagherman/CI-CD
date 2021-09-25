@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar should match snapshot 1`] = `
+<div>
+  <v-app-bar-stub
+    app="true"
+    class="navbar"
+    extensionheight="48"
+    flat="true"
+    src=""
+    tag="header"
+    value="true"
+  >
+    <v-container-stub
+      class="py-0 fill-height"
+      tag="div"
+    >
+      <v-toolbar-items-stub
+        class="hidden-lg-and-up"
+      >
+        <v-app-bar-nav-icon-stub />
+      </v-toolbar-items-stub>
+       
+      <v-col-stub
+        tag="div"
+      >
+        <v-btn-stub
+          activeclass=""
+          class="text-h5 hidden-sm-and-down"
+          color="grey darken-1"
+          tag="button"
+          text="true"
+          to="/"
+          type="button"
+        >
+          
+          Simple Store
+        
+        </v-btn-stub>
+      </v-col-stub>
+       
+      <v-btn-stub
+        activeclass=""
+        class="hidden-md-and-down"
+        tag="button"
+        text="true"
+        to="/"
+        type="button"
+      >
+        
+        Home
+      
+      </v-btn-stub>
+      <v-btn-stub
+        activeclass=""
+        class="hidden-md-and-down"
+        tag="button"
+        text="true"
+        to="/info"
+        type="button"
+      >
+        
+        Info
+      
+      </v-btn-stub>
+      <v-btn-stub
+        activeclass=""
+        class="hidden-md-and-down"
+        tag="button"
+        text="true"
+        to="/contacts"
+        type="button"
+      >
+        
+        Contacts
+      
+      </v-btn-stub>
+       
+      <v-spacer-stub />
+       
+      <search-stub
+        items=""
+        value=""
+      />
+       
+      <v-spacer-stub />
+       
+      <v-icon-stub
+        class="hidden-md-and-down"
+      >
+        
+        fas fa-shopping-cart fa-2x
+      
+      </v-icon-stub>
+       
+      <v-badge-stub
+        bordered="true"
+        bottom="true"
+        class="hidden-md-and-down"
+        color="yellow darken-3"
+        content="6"
+        label="$vuetify.badge"
+        offsetx="10"
+        offsety="20"
+        transition="scale-rotate-transition"
+        value="true"
+      />
+       
+      <v-spacer-stub />
+       
+      <div
+        class="text-center hidden-md-and-down"
+      >
+        <v-menu-stub
+          closedelay="0"
+          closeonclick="true"
+          closeoncontentclick="true"
+          contentclass=""
+          maxheight="auto"
+          maxwidth="auto"
+          nudgebottom="0"
+          nudgeleft="0"
+          nudgeright="0"
+          nudgetop="0"
+          nudgewidth="0"
+          offsety="true"
+          opendelay="0"
+          openonclick="true"
+          origin="top left"
+          transition="v-menu-transition"
+        >
+           
+          <account-stub />
+        </v-menu-stub>
+      </div>
+    </v-container-stub>
+  </v-app-bar-stub>
+   
+  <v-navigation-drawer-stub
+    fixed="true"
+    height="100%"
+    minivariantwidth="56"
+    mobilebreakpoint="1264"
+    src=""
+    tag="aside"
+    temporary="true"
+    width="256"
+  >
+    <categories-stub
+      class="col-md-12 col-12"
+    />
+  </v-navigation-drawer-stub>
+</div>
+`;

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <RouterView />
-    <ErrorMessage />
+    <div>
+      <RouterView />
+      <ErrorMessage />
+    </div>
   </div>
 </template>
 

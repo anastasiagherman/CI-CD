@@ -3,4 +3,5 @@ module.exports = {
   testMatch: ["<rootDir>/src/**/*.spec.js"],
   automock: false,
   reporters: ['default'],
+  snapshotSerializers: ['jest-serializer-vue']
 }

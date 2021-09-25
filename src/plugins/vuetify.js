@@ -1,4 +1,5 @@
 import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all';
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import colors from "vuetify/lib/util/colors";

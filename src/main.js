@@ -6,12 +6,14 @@ import store from "./store";
 import './plugins/infinteScroll';
 import './guards';
 import './interceptors';
+import MyComponent from "./MyComponent";
 
 Vue.config.productionTip = false
-
+Vue.component('MyComponent', MyComponent)
 new Vue({
   vuetify,
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
