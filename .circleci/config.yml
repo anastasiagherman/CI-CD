@@ -1,14 +1,12 @@
 version: 2
 jobs:
   build:
-    machine: true
     working_directory: ~/tmp
     docker:
-      - image: node:14.18.1-alpine
+      - image: circleci/node:gallium-bullseye-browsers-legacy
     steps:
       - checkout
       - run: npm install
-      - run: cp .circleci/config.yml config.yml
       - setup_remote_docker
       - run:
           name: Start all services declared in docker-compose.yml
