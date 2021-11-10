@@ -20,6 +20,6 @@ jobs:
       - run:
           name: Start all services declared in docker-compose.yml
           command: |
-          set -x
-          docker-compose up -d
+            set -x
+            docker-compose up -d
       - run: npm run test:unit
