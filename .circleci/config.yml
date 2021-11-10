@@ -4,18 +4,18 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: node:14.18.1-alpine
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - run: npm install
-      - docker/install-docker-compose:
-          version: '1.29.2'
       - setup_remote_docker
       - run:
-          name: Install curl
-          command: apk update && apk add curl curl-dev bash
+          name: Install dependencies
+          command: |
+            apk add --no-cache py-pip=9.0.0-r1
+            pip install docker-compose==1.15.0
       - run:
           name: Start all services declared in docker-compose.yml
           command: |
-            set -x
             docker-compose up -d
       - run: npm run test:unit
