@@ -12,15 +12,14 @@ jobs:
           name: Install curl
           command: apk update && apk add curl curl-dev bash
       - run:
-            name: Install docker-compose
+          name: Install Docker Compose
             command: |
               set -x
-              curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+              curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
               chmod +x /usr/local/bin/docker-compose
-              docker-compose --version
       - run:
           name: Start all services declared in docker-compose.yml
           command: |
             set -x
-            /usr/local/bin/docker-compose up -d
+            docker-compose up -d
       - run: npm run test:unit
