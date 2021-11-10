@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: node:14.18.1-alpine
-      - image: docker:17.05.0-ce-git
+      - image: docker:git
     steps:
       - checkout
       - run: npm install
