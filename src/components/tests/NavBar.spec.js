@@ -1,16 +1,15 @@
-import {createLocalVue, mount} from "@vue/test-utils";
+import {createLocalVue,shallowMount} from "@vue/test-utils";
 import NavBar from "../NavBar";
 import Vuex from "vuex";
 import Vuetify from 'vuetify';
 import VueRouter from "vue-router";
+import Vue from 'vue'
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Vuetify);
-localVue.use(VueRouter);
-// localVue.component('VIcon', {
-//
-// })
+// const localVue = createLocalVue();
+Vue.use(Vuex);
+Vue.use(Vuetify);
+Vue.use(VueRouter);
+
 
 const store = new Vuex.Store({
     getters: {
@@ -21,9 +20,9 @@ const store = new Vuex.Store({
 
 describe('NavBar', () => {
     it('should match snapshot', () => {
-        const component = mount(NavBar, {
+        const component = shallowMount(NavBar, {
             store,
-            localVue,
+            Vue,
             vuetify: new Vuetify({
                 icons: {
                     iconfont: 'fa',
