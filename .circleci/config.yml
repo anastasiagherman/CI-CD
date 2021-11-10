@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tmp
+    docker:
+      - image: circleci/vue:2
+    steps:
+      - checkout
+      - run: npm install
+      - setup_remote_docker:
+          version: 20.10.2
+      - run:
+          name: Start all services declared in docker-compose.yml
+          command: docker-compose up -d
+      - run: npm run test:unit
