@@ -9,6 +9,9 @@ jobs:
       - run: npm install
       - setup_remote_docker
       - run:
+          name: Install curl
+          command: apk update && apk add curl curl-dev bash
+      - run:
             name: Install docker-compose
             command: |
               set -x
