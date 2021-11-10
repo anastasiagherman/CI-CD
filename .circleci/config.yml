@@ -7,8 +7,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - setup_remote_docker:
-          version: 20.10.2
+      - setup_remote_docker
       - run:
           name: Start all services declared in docker-compose.yml
           command: docker-compose up -d
