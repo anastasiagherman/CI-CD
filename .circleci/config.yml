@@ -1,19 +1,15 @@
 version: 2
 jobs:
   build:
+    machine: true
     working_directory: ~/tmp
     docker:
       - image: node:14.18.1-alpine
-      - image: docker:git
     steps:
       - checkout
       - run: npm install
+      - run: cp .circleci/config.yml config.yml
       - setup_remote_docker
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache py-pip=9.0.0-r1
-            pip install docker-compose==1.15.0
       - run:
           name: Start all services declared in docker-compose.yml
           command: |
