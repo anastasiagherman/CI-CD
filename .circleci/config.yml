@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  docker: circelci/docker@1.7.0
 jobs:
   build:
     working_directory: ~/tmp
@@ -7,17 +9,11 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - docker/install-docker-compose
       - setup_remote_docker
       - run:
           name: Install curl
           command: apk update && apk add curl curl-dev bash
-      - run:
-          name: Install Docker Compose
-          command: |
-            set -x
-            - curl -L https://github.com/docker/compose/releases/download/1.10.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            - chmod +x /usr/local/bin/docker-compose
-            - docker-compose version
       - run:
           name: Start all services declared in docker-compose.yml
           command: |
