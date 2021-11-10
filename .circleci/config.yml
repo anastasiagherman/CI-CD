@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/tmp
     docker:
-      - image: circleci/vue:2
+      - image: node:14.18.1-alpine
     steps:
       - checkout
       - run: npm install
